@@ -2,5 +2,5 @@
 
    ## Как запустить
 
-   1. Склонируйте репозиторий с помощью git clone https://github.com/NikitaCherepov/test
+   1. Склонируйте репозиторий с помощью git clone https://github.com/NikitaCherepov/test . Или же скачайте архивом.
    2. Откройте файл index.html в вашем браузере.
