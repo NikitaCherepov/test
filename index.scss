@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+}
+body {
+  padding-top: 100px;
+  background-color: #e5e5e5;
+}
+
+
+
+.container {
+  width:80%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: auto;
+  flex-wrap: wrap;
+
+  &__slider {
+    width:80%;
+    height:10px;
+  }
+
+  &__switch {
+    width:10%;
+    min-width: 80px;
+    font-size:1em;
+
+    &__button {
+      user-select: none;
+      cursor:pointer;
+    }
+
+  }
+  
+}
+
+//Стили кнопок
+
+.on {
+  color: #0167B3;
+}
+.off {
+  color: #D3DCF1;
+  text-decoration: underline;
+}
+
+//Всё, что связано со слайдером
+
+#slider .noUi-handle::before, #slider .noUi-handle::after {
+  visibility: hidden;
+}
+//Цвет progress bar-а
+.noUi-connect, .progress-bar {
+  background-color: #5CADEA;
+}
+
+//Кастомизация ручек
+#slider .noUi-handle {
+    display: relative;
+    height: 18px;
+    width: 18px;
+    top: -5px;
+    right: -9px; /* half the width */
+    border-radius: 9px;
+    background-color: #5CADEA;
+    box-shadow: none;
+    border: none;
+    cursor: grabbing;
+}
+#slider .noUi-touch-area::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//Исчезновение отметок
+#slider .noUi-marker {
+  display:none;
+}
+
+//Кастомизация тултипов к ручкам
+#slider .noUi-tooltip {
+  color: #0167B3;
+  border-radius: 10px;
+  border:none;
+  margin-bottom:10px;
+}
+
+//Острый уголок
+#slider .noUi-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 85%;
+  left: 45%;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 100px;
+  border-top-left-radius: 0;
+  transform: rotate(225deg);
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  #slider {
+    font-size: 0.8em;
+    .noUi-value {
+      width: fit-content;
+      transform: rotate(270deg);
+    }
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+  #slider {
+    .noUi-value {
+      margin-top: -5px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 800px){
+
+  .container {
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    row-gap: 70px;
+    width: 95%;
+    &__slider {
+      width: 100%;
+    }
+    &__switch {
+      text-align: center;
+    }
+  }
+  #slider {
+    .noUi-pips {
+      width:96%;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #slider {
+    font-size: 0.7em;
+  }
+}

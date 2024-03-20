@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="node_modules/nouislider/dist/nouislider.css">
+    <script src="node_modules/nouislider/dist/nouislider.js"></script>
+    <script src="wNumb.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet">
+    <title>Тестовый слайдер</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container__switch">
+            <div class="container__switch__button on" id="year" onclick="year()">
+                Все года
+            </div>
+            <div class="container__switch__button off" id="month" onclick="month()">
+                Месяца
+            </div>
+        </div>
+        <div id="slider" class="container__slider"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
