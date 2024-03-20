@@ -1,3 +1,12 @@
+//Минимальная/максимальная дата
+const actualMinPoint = '2014-01';
+const actualMaxPoint = '2021-01';
+
+//Выбранные даты с самого начала
+let chosenLeftDate = '2015-05';
+let chosenRightDate = '2016-02';
+
+
 let switchSlider = 0;
 let chosenLeftYear = 0;
 let chosenLeftMonth = 0;
@@ -32,8 +41,6 @@ function timestamp(str) {
     return new Date(str).getTime();
 }
 
-const actualMinPoint = '2014-01';
-const actualMaxPoint = '2021-01';
 
 //Минимальная и максимальная дата (в изначальном формате)
 
@@ -45,8 +52,8 @@ let minDate = new Date(timestamp(minPoint));
 let maxDate = new Date(timestamp(maxPoint));
 
 
-let chosenLeftDate = '2015-05';
-let chosenRightDate = '2016-02';
+
+
 
 
 //Вычисление позиции на шкале
@@ -71,12 +78,12 @@ for (let i = minDate.getUTCFullYear(); i <= maxDate.getUTCFullYear(); i++) {
             pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(i + "-" + k + "-02")));
         }
     }
-    else if (i !== minDate.getUTCFullYear() && i !== maxDate.getUTCFullYear) {
+    else if (i !== minDate.getUTCFullYear() && i !== maxDate.getUTCFullYear()) {
         for (let k = 1; k <= 12; k++) {
             pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(i + "-" + k + "-02")));
         }
     }
-    else if (i == maxDate.getUTCFullYear) {
+    else if (i == maxDate.getUTCFullYear()) {
         for (let k = 1; k <= maxDate.getFullYear() + 1; k++) {
             pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(i + "-" + k + "-02")));
         }
@@ -86,7 +93,19 @@ for (let i = minDate.getUTCFullYear(); i <= maxDate.getUTCFullYear(); i++) {
 //Создание массива, если нужны только года
 else {
     for (let i = minDate.getUTCFullYear(); i <= maxDate.getUTCFullYear(); i++) {
-        pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(i + "-01-02")));
+        if (minDate.getUTCMonth() !== 0 && i == minDate.getUTCFullYear()) {
+            pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(minDate.getFullYear() + "-" + (+minDate.getUTCMonth()+1) + "-02")));
+            console.log(minDate.getFullYear() + "-" + (+minDate.getUTCMonth()+1) + "-02");
+        }
+        else if (maxDate.getUTCMonth() !== 0 && i == maxDate.getUTCFullYear()) {
+            pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(maxDate.getFullYear() + "-" + (+maxDate.getUTCMonth()+1) + "-02")));
+            console.log(maxDate.getFullYear() + "-" + (+maxDate.getUTCMonth()+1) + "-02");
+        }
+        else if (i !== +maxDate.getUTCFullYear() || i !== +minDate.getUTCFullYear()) {
+            pipsArray.push(calculatePipPosition(minDate, maxDate, timestamp(i + "-01-02")));
+            console.log("i= " + i);
+            console.log(i + "-01-02");
+        }
     }
 }
 
@@ -123,6 +142,9 @@ noUiSlider.create(slider, {
                     else if (date.getUTCMonth() == 0 && switchSlider == 0) {
                         return date.getUTCFullYear();
                     }
+                    else if (date.getUTCMonth() !== 0 && switchSlider == 0) {
+                        return (getFormattedMonth[date.getUTCMonth()] + " " + date.getUTCFullYear());
+                    }
                     else if (switchSlider == 1) {
                         return getFormattedMonth[date.getUTCMonth()];
                     }
@@ -141,20 +163,6 @@ slider.noUiSlider.on('update', function (values, handle) {
     }
 });
 }
-
-
-
-function formatDate(date) {
-    var options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  }
-
-
-
-var formatter = new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full'
-});
-
 
 
 
@@ -188,11 +196,11 @@ function month() {
         maxPoint = chosenLeftYear + 1 + "-01-02";
     }
 
-
     //Если выбранный максимальный год больше чем максимальный, то это исправляется
     if(timestamp(chosenRightDate) > timestamp(maxPoint)) {
         chosenRightDate = maxPoint;
     }
+    if (timestamp(chosenLeftDate) )
 
     slider.noUiSlider.destroy();
     createSlider();
