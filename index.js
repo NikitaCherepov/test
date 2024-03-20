@@ -118,7 +118,7 @@ noUiSlider.create(slider, {
           to: function(value) {
                 let date = new Date(+value);
                     if (date.getUTCMonth() == 0 && switchSlider == 1) {
-                        return "<strong>" + date.getUTCFullYear() + "</strong>";
+                        return "<strong style='color: #333333;'>" + date.getUTCFullYear() + "</strong>";
                     }
                     else if (date.getUTCMonth() == 0 && switchSlider == 0) {
                         return date.getUTCFullYear();
@@ -128,6 +128,16 @@ noUiSlider.create(slider, {
                     }
             }
         }
+    }
+});
+
+//Добавление класса для кастомизации левого и правого тултипа
+slider.noUiSlider.on('update', function (values, handle) {
+    let tooltip = slider.querySelectorAll('.noUi-tooltip');
+    if (handle === 0) { //левый
+        tooltip[handle].classList.add('tooltip-min');
+    } else { //правый
+        tooltip[handle].classList.add('tooltip-max');
     }
 });
 }
@@ -206,3 +216,4 @@ function year() {
     slider.noUiSlider.destroy();
     createSlider();
 }
+
